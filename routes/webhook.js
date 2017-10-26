@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const chatService = require('./server/chatService');
+const chatService = require('../server/chatService');
 
 /* GET hello world page. */
 router.get('/webhook', function(req, res, next) {
