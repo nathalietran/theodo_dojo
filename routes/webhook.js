@@ -24,9 +24,9 @@ router.post('/', (req, res) => {
 
     // Iterate over each entry - there may be multiple if batched
     body.entry.forEach(function(entry) {
-      id_user = event.sender.id
-      console.log(event.sender.id, event.message.text);
       entry.messaging.forEach(function(event) {
+        id_user = event.sender.id;
+        console.log(event.sender.id, event.message.text);
         if (event.message) {
           console.log(event.sender);
           chatService.sendTextMessage(id_user, event.message.text);
