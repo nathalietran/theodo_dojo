@@ -25,13 +25,8 @@ router.post('/', (req, res) => {
       id_user = event.sender.id
       entry.messaging.forEach(function(event) {
         if (event.message) {
-          if (!userService.isUserKnown(id_user)) {
-            response = 'Bienvenue !'
-            console.log(event.sender)
-            chatService.sendTextMessage(id_user, response);
-          } else {
-            chatService.sendTextMessage(id_user, event.message.text);
-          }
+          console.log(event.sender);
+          chatService.sendTextMessage(id_user, event.message.text);
         } else {
           console.log('...');
         }
