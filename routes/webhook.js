@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const chatService = require('../server/chatService');
+const userService = require('../server/userService');
 
 /* GET hello world page. */
 router.get('/', function(req, res, next) {
@@ -21,11 +22,16 @@ router.post('/', (req, res) => {
 
     // Iterate over each entry - there may be multiple if batched
     body.entry.forEach(function(entry) {
-
-
+      id_user = event.sender.id
       entry.messaging.forEach(function(event) {
         if (event.message) {
-          chatService.sendTextMessage(event.sender.id, event.message.text);
+          if (!userService.isUserKnown(id_user) {
+            response = 'Bienvenue !'
+            console.log(event.sender)
+            chatService.sendTextMessage(id_user, response);
+          } else {
+            chatService.sendTextMessage(id_user, event.message.text);
+          }
         } else {
           console.log('...');
         }
