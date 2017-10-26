@@ -3,7 +3,7 @@ var router = express.Router();
 const chatService = require('../server/chatService');
 
 /* GET hello world page. */
-router.get('/webhook', function(req, res, next) {
+router.get('/', function(req, res, next) {
   if (chatService.authenticate(req)) {
     res.status(200).send(req.query['hub.challenge']);
   } else {
