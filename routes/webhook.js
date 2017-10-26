@@ -26,10 +26,13 @@ router.post('/', (req, res) => {
     body.entry.forEach(function(entry) {
       entry.messaging.forEach(function(event) {
         id_user = event.sender.id;
-        console.log(event.sender.id, event.message.text);
         if (event.message) {
-          console.log(event.sender);
-          chatService.sendTextMessage(id_user, event.message.text);
+          if (userService.isUserKnown(id_user)) {
+            userService.addUser(id_user, id_user);
+            chatService.sendTextMessage(id_user, 'Bienvenue !\n' + event.message.text);
+          } else {
+            chatService.sendTextMessage(id_user, event.message.text);
+          }
         } else {
           console.log('...');
         }
